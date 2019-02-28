@@ -26,7 +26,7 @@ class UserTopic extends BaseModel
         self::$_instance = null;
     }
 
-    protected $table = 'user_topic';
+    protected $table = 'topic_user';
 
     protected $fillable = [
         'user_id', 'topic_id'

@@ -2,6 +2,8 @@
 
 namespace App\Models\v1;
 use App\Models\BaseModel;
+use App\Models\v1\Topic;
+use App\Models\v1\Job;
 
 class User extends BaseModel
 {
@@ -34,4 +36,14 @@ class User extends BaseModel
         'bank', 'bank_account_number', 'bank_account_name', 'bank_account_branch',
         'created_at', 'updated_at'
     ];
+
+    public function topics()
+    {
+        return $this->belongsToMany(Topic::class);
+    }
+
+    public function jobs()
+    {
+        return $this->belongsToMany(Job::class);
+    }
 }

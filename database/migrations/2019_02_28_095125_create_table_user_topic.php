@@ -13,7 +13,7 @@ class CreateTableUserTopic extends Migration
      */
     public function up()
     {
-        Schema::create('user_topic', function (Blueprint $table) {
+        Schema::create('topic_user', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('topic_id');
         });

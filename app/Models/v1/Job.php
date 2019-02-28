@@ -2,6 +2,7 @@
 
 namespace App\Models\v1;
 use App\Models\BaseModel;
+use App\Models\v1\User;
 
 class Job extends BaseModel
 {
@@ -29,6 +30,11 @@ class Job extends BaseModel
     protected $table = 'job';
 
     protected $fillable = [
-        'job', 'created_at', 'updated_at'
+        'name', 'created_at', 'updated_at'
     ];
+
+    public function user ()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

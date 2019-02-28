@@ -13,7 +13,7 @@ class CreateTableUserJob extends Migration
      */
     public function up()
     {
-        Schema::create('user_job', function (Blueprint $table) {
+        Schema::create('job_user', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('job_id');
         });

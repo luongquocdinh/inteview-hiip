@@ -2,6 +2,7 @@
 
 namespace App\Models\v1;
 use App\Models\BaseModel;
+use App\Models\v1\User;
 
 class Topic extends BaseModel
 {
@@ -31,4 +32,9 @@ class Topic extends BaseModel
     protected $fillable = [
         'name', 'created_at', 'updated_at'
     ];
+
+    public function user ()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

@@ -26,7 +26,7 @@ class UserJob extends BaseModel
         self::$_instance = null;
     }
 
-    protected $table = 'user_job';
+    protected $table = 'job_user';
 
     protected $fillable = [
         'user_id', 'job_id'

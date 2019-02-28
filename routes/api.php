@@ -18,3 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login-facebook', 'v1\AuthController@facebook');
+
+Route::get('/user/{id}', 'v1\UserController@profile');
+Route::put('/user/{id}', 'v1\UserController@update');
+
+Route::post('/topic', 'v1\TopicController@create');
+Route::post('/follow-topic/{user_id}', 'v1\TopicController@follow');
+
+Route::post('/job', 'v1\JobController@create');
+Route::post('/follow-job/{user_id}', 'v1\JobController@follow');
