@@ -16,6 +16,8 @@ class CreateTableTopic extends Migration
         Schema::create('topic', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->integer('created_at')->nullable();
+            $table->integer('updated_at')->nullable();
         });
     }
 

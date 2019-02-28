@@ -61,15 +61,17 @@ class BusinessSocial implements BusinessInterface
             $response = $fb->get('/me?fields=id,name,email,link,birthday,gender', $access_token);
             $profile = $response->getGraphUser();
             $data = [
-                'facebook_id' => $profile['id'],
+                'social_id' => $profile['id'],
                 'name' => $profile['name'],
                 'email' => $profile['email'],
                 'link' => $profile['link'],
-                'birthday' => $profile['birthday'],
-                'gender' => $profile['gender']
+                'birthday' => $profile['birthday'] ,
+                'gender' => $profile['gender'],
+                'login_type' => 'facebook'
             ];
-
-            return $data;
+            
+            $model = $this->getModel()->create($data);
+            return $model;
         } catch (Exception $e) {
             dd ($e);
         }

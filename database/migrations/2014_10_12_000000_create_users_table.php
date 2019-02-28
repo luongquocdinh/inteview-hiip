@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('bank_account_number')->nullable();
             $table->string('bank_account_name')->nullable();
             $table->string('bank_account_branch')->nullable();
+            $table->integer('created_at')->nullable();
+            $table->integer('updated_at')->nullable();
         });
     }
 

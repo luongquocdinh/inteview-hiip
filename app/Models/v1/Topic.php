@@ -29,6 +29,6 @@ class Topic extends BaseModel
     protected $table = 'topic';
 
     protected $fillable = [
-        'name'
+        'name', 'created_at', 'updated_at'
     ];
 }

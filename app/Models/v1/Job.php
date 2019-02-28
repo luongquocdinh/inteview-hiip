@@ -29,6 +29,6 @@ class Job extends BaseModel
     protected $table = 'job';
 
     protected $fillable = [
-        'job'
+        'job', 'created_at', 'updated_at'
     ];
 }
