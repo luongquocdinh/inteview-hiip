@@ -30,8 +30,8 @@ class BusinessSocial implements BusinessInterface
     public function facebook ($access_token)
     {
         $fb = new \Facebook\Facebook([
-            'app_id' => '1564202427049041',
-            'app_secret' => '94453bca75482fd8069334192977eb83',
+            'app_id' => '',
+            'app_secret' => '',
             'default_graph_version' => 'v3.2',
         ]);
 
