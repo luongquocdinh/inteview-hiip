@@ -30,14 +30,24 @@ class BusinessSocial implements BusinessInterface
     public function facebook ($access_token)
     {
         $fb = new \Facebook\Facebook([
-            'app_id' => '',
-            'app_secret' => '',
+            'app_id' => env ( 'FB_CLIENT_ID' ),
+            'app_secret' => env ( 'FB_CLIENT_SECRET' ),
             'default_graph_version' => 'v3.2',
         ]);
 
         try {
-            $response = $fb->get('/me?fields=id,name,email,link,birthday', $access_token);
-            dd($response->getGraphUser());
+            $response = $fb->get('/me?fields=id,name,email,link,birthday,gender', $access_token);
+            $profile = $response->getGraphUser();
+            $data = [
+                'facebook_id' => $profile['id'],
+                'name' => $profile['name'],
+                'email' => $profile['email'],
+                'link' => $profile['link'],
+                'birthday' => $profile['birthday'],
+                'gender' => $profile['gender']
+            ];
+
+            return $data;
         } catch (Exception $e) {
             dd ($e);
         }

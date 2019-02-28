@@ -7,13 +7,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HttpCode;
+
 class RestApiController extends Controller
 {
     public static function success($data, $additional = [])
     {
         return response()->json([
             'success' => true,
-            'status' => self::SUCCESS,
+            'status' => HttpCode::SUCCESS,
             'data' => $data,
             'additional' => $additional
         ]);

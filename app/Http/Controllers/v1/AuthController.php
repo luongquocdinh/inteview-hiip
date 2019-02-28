@@ -16,6 +16,8 @@ class AuthController extends RestApiController
     public function facebook (Request $request)
     {
         $access_token = $request->access_token;
-        BusinessSocial::getInstance()->facebook($access_token);
+        $user = BusinessSocial::getInstance()->facebook($access_token);
+
+        return self::success($user);
     }
 }
