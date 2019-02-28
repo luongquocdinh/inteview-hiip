@@ -7,6 +7,7 @@ namespace App\Business;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\v1\User;
 use Facebook\Facebook;
 
 class BusinessSocial implements BusinessInterface
@@ -16,7 +17,7 @@ class BusinessSocial implements BusinessInterface
     /**
      * Use singleton pattern
      *
-     * @return Users object
+     * @return BusinessSocial object
      */
     static public function getInstance()
     {
@@ -25,6 +26,27 @@ class BusinessSocial implements BusinessInterface
         }
 
         return self::$_instance;
+    }
+
+    /**
+     * get model instance
+     *
+     * @param mixed $data
+     *
+     * @return User Object
+     */
+    public static function getModel($data = array())
+    {
+        $model = User::getInstance();
+        if ($data) {
+            if (is_numeric($data)) {
+                $model = $model->find($data);
+            } else {
+                return $model;
+            }
+        }
+
+        return $model;
     }
 
     public function facebook ($access_token)
