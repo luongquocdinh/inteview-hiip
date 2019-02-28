@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('social_id');
             $table->string('login_type');
             $table->decimal('avg_interaction')->nullable();
+            $table->string('link')->nullable();
             $table->string('identity_card')->nullable();
             $table->string('bank')->nullable();
             $table->string('bank_account_number')->nullable();

@@ -29,7 +29,7 @@ class User extends BaseModel
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'phone', 'birthday', 'gender', 'email', 'address', 
+        'name', 'phone', 'birthday', 'gender', 'email', 'address', 'link',
         'social_id', 'login_type', 'avg_interaction', 'identity_card', 
         'bank', 'bank_account_number', 'bank_account_name', 'bank_account_branch',
         'created_at', 'updated_at'
