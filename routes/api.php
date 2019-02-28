@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login-facebook', 'v1\AuthController@facebook');
 
+Route::get('/users', 'Admin\AdminUserController@getListUser');
+Route::post('/search', 'Admin\AdminUserController@search');
+
 Route::get('/user/{id}', 'v1\UserController@profile');
 Route::put('/user/{id}', 'v1\UserController@update');
 

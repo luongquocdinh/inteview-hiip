@@ -8,6 +8,7 @@ namespace App\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\v1\User;
+use App\Helpers\HttpCode;
 
 class BusinessUser implements BusinessInterface
 {
@@ -67,12 +68,42 @@ class BusinessUser implements BusinessInterface
         return $this->getModel($id);
     }
 
-    public function getByConditions($condition)
+    public function paginate()
+    {
+        return $this->getModel()->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function searchName ($keyword)
+    {
+        return $this->getModel()->where('name', 'LIKE', '%'. $keyword .'%')->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function searchAddress ($keyword)
+    {
+        return $this->getModel()->where('address', 'LIKE', '%'. $keyword .'%')->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function searchIdentity ($keyword)
+    {
+        return $this->getModel()->where('identity_card', 'LIKE', '%'. $keyword .'%')->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function searchBankNumber ($keyword)
+    {
+        return $this->getModel()->where('bank_account_number', 'LIKE', '%'. $keyword .'%')->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function searchLoginType ($keyword)
+    {
+        return $this->getModel()->where('login_type', 'LIKE', '%'. $keyword .'%')->paginate(HttpCode::PER_PAGE);
+    }
+
+    public function getByConditions($condition = [])
     {
         return $this->getModel()->where($condition)->get();
     }
 
-    public function getFirstCondition($condition)
+    public function getFirstCondition($condition = [])
     {
         return $this->getModel()->where($condition)->first();
     }

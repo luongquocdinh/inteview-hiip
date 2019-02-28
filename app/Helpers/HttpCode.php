@@ -12,6 +12,7 @@ class HttpCode
     const PER_PAGE = 15;
 
     // META HTTP CODE
+    const FAIL = 100;
     const SUCCESS = 200;
 
     const NOT_MODIFIED = 304;

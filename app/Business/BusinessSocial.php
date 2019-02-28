@@ -8,7 +8,9 @@ namespace App\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\v1\User;
+use App\Business\BusinessUser;
 use Facebook\Facebook;
+use App\Helpers\HttpCode;
 
 class BusinessSocial implements BusinessInterface
 {
@@ -60,6 +62,10 @@ class BusinessSocial implements BusinessInterface
         try {
             $response = $fb->get('/me?fields=id,name,email,link,birthday,gender', $access_token);
             $profile = $response->getGraphUser();
+            $user = BusinessUser::getInstance()->getFirstCondition(['social_id' => $profile['id']]);
+            if ($user) {
+                return $user;
+            }
             $data = [
                 'social_id' => $profile['id'],
                 'name' => $profile['name'],
@@ -72,8 +78,8 @@ class BusinessSocial implements BusinessInterface
             
             $model = $this->getModel()->create($data);
             return $model;
-        } catch (Exception $e) {
-            dd ($e);
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            return HttpCode::UNAUTHORIZED;
         }
     }
 }
