@@ -19,14 +19,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login-facebook', 'v1\AuthController@facebook');
 
-Route::get('/users', 'Admin\AdminUserController@getListUser');
-Route::post('/search', 'Admin\AdminUserController@search');
+Route::group([
+    'prefix' => 'admin'
+], function () {
+    Route::group(['namespace' => 'Admin'], function () {
+        Route::get('/users', 'AdminUserController@getListUser');
+        Route::post('/search', 'AdminUserController@search');
+    });
+});
 
-Route::get('/user/{id}', 'v1\UserController@profile');
-Route::put('/user/{id}', 'v1\UserController@update');
+Route::group([
+    'prefix' => 'v1'
+], function () {
+    Route::group(['namespace' => 'v1'], function () {
+        Route::get('/user/{id}', 'UserController@profile');
+        Route::put('/user/{id}', 'UserController@update');
 
-Route::post('/topic', 'v1\TopicController@create');
-Route::post('/follow-topic/{user_id}', 'v1\TopicController@follow');
+        Route::post('/topic', 'TopicController@create');
+        Route::post('/follow-topic/{user_id}', 'TopicController@follow');
 
-Route::post('/job', 'v1\JobController@create');
-Route::post('/follow-job/{user_id}', 'v1\JobController@follow');
+        Route::post('/job', 'JobController@create');
+        Route::post('/follow-job/{user_id}', 'JobController@follow');
+    });
+});
