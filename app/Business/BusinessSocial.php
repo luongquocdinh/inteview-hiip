@@ -77,9 +77,31 @@ class BusinessSocial implements BusinessInterface
             ];
             
             $model = $this->getModel()->create($data);
+            $this->sendMailActive($model);
             return $model;
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             return HttpCode::UNAUTHORIZED;
+        }
+    }
+
+    private function sendMailActive($model)
+    {
+        $from = new \SendGrid\Email("Email", "test@example.com");
+        $subject = utf8_encode("Welcome To Hiip");
+        $to = new \SendGrid\Email("Email", $model->email);
+
+        $content = view('auth.verify_account')->with([
+            'email' => $model->email,
+        ]);
+
+        $content = new \SendGrid\Content("text/html", $content);
+        $request_body = new \SendGrid\Mail($from, $subject, $to, $content);
+
+        $sg = new \SendGrid(env ( 'SENDGRID_API_KEY' ));
+        try {
+            $response = $sg->client->mail()->send()->post($request_body);
+        } catch (\Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 }
